@@ -10,4 +10,5 @@ activator*
 .DS_Store
 /project
 /.sbtserver
-.iml
+has-200.iml
+/out
