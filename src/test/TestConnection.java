@@ -3,6 +3,8 @@ import org.avineas.fins.payload.Command;
 import org.avineas.fins.payload.Response;
 import org.junit.Test;
 import javax.xml.bind.DatatypeConverter;
+import java.net.*;
+import java.util.Enumeration;
 
 /**
  * Created by juan
@@ -12,12 +14,16 @@ import javax.xml.bind.DatatypeConverter;
 public class TestConnection {
 
     @Test
-    public void run(){
-        String aux = "01023100000A000101";
+    public void run() throws UnknownHostException, SocketException {
         Address address = new Address(1, 1, 0);
         final Client client = new Client(new Transmitter(), address);
-        String hex = "80000201010001650003010270000302000103";
-        final byte[] bytes = toByteArray(hex);
+
+        final String headerFINS = HeaderFINS.getHeaderFINS(address, true);
+        String goldenEncabezadoFins = "80000201010001650003";
+        assert goldenEncabezadoFins.equals(headerFINS);
+
+        String data = "010270000302000103";
+        final byte[] bytes = toByteArray(goldenEncabezadoFins + data);
         final Command command = new Command(bytes);
         try {
             final Response response = client.handleCommand(command);

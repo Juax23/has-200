@@ -15,11 +15,12 @@ public class Transmitter implements org.avineas.fins.Transmitter {
 
     @Override
     public Response sendPacket(Address to, Command command) throws IOException{
-        DatagramSocket clientSocket = new DatagramSocket(9601);
-        InetAddress IPAddress = InetAddress.getByName("192.168.0.1");
+        int port = Integer.parseInt("960" + to.getNodeNumber());
+        DatagramSocket clientSocket = new DatagramSocket(port);
+        InetAddress IPAddress = InetAddress.getByName("192.168.0." + to.getNodeNumber());
         byte[] receiveData = new byte[1024];
         byte[] sendData = command.getBytes();
-        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9601);
+        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
         clientSocket.send(sendPacket);
         clientSocket.receive(receivePacket);
