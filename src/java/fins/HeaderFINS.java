@@ -1,3 +1,5 @@
+package fins;
+
 import org.avineas.fins.Address;
 
 import javax.xml.bind.DatatypeConverter;

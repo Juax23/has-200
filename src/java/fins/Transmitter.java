@@ -1,3 +1,5 @@
+package fins;
+
 import org.avineas.fins.Address;
 import org.avineas.fins.payload.Command;
 import org.avineas.fins.payload.Response;

@@ -1,3 +1,5 @@
+package fins;
+
 import org.avineas.fins.*;
 import org.avineas.fins.Transmitter;
 import org.avineas.fins.payload.Command;
@@ -25,7 +27,7 @@ public class Client implements Unit{
     @Override
     public Response handleCommand(Command command) throws Exception {
         if (myTransmitter == null || myAddress == null) {
-            throw new NullPointerException("Transmitter or Address are not defined or null");
+            throw new NullPointerException("fins.Transmitter or Address are not defined or null");
         } else {
             return myTransmitter.sendPacket(myAddress, command);
         }
