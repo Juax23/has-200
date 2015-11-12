@@ -17,7 +17,8 @@ public class Transmitter implements org.avineas.fins.Transmitter {
 
     @Override
     public Response sendPacket(Address to, Command command) throws IOException{
-        int port = Integer.parseInt("960" + to.getNodeNumber());
+        final byte nodeNumber = to.getNodeNumber();
+        int port = Integer.parseInt((nodeNumber == 10 ? "96" : "960") + to.getNodeNumber());
         DatagramSocket clientSocket = new DatagramSocket(port);
         InetAddress IPAddress = InetAddress.getByName("192.168.0." + to.getNodeNumber());
         byte[] receiveData = new byte[1024];

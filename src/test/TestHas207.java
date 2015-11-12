@@ -5,11 +5,9 @@ import org.avineas.fins.Address;
 import org.avineas.fins.payload.Command;
 import org.avineas.fins.payload.Response;
 import org.junit.Test;
-import stations.Has204;
 import stations.Has207;
 
 import javax.xml.bind.DatatypeConverter;
-import java.net.SocketException;
 
 /**
  * Created by juan
@@ -23,7 +21,7 @@ public class TestHas207 {
         final Client client = new Client(new Transmitter(), address);
         final String headerFINS = HeaderFINS.getHeaderFINS(address, true);
 
-        String data = Has207.bufferBCR1("1023");
+        String data = Has207.bufferBCR1("4002");
         byte[] bytes = toByteArray(headerFINS + data);
         Command command = new Command(bytes);
         Response response = client.handleCommand(command);
@@ -35,7 +33,7 @@ public class TestHas207 {
         response = client.handleCommand(command);
         printByteArray(response.getBytes());
 
-        data = Has207.bCRAllow("1023", false);
+        data = Has207.bCRAllow("4002", false);
         bytes = toByteArray(headerFINS + data);
         command = new Command(bytes);
         response = client.handleCommand(command);
@@ -47,7 +45,7 @@ public class TestHas207 {
         response = client.handleCommand(command);
         printByteArray(response.getBytes());
 
-        data = Has207.bCRAllow("1023", true);
+        data = Has207.bCRAllow("4002", true);
         bytes = toByteArray(headerFINS + data);
         command = new Command(bytes);
         response = client.handleCommand(command);
